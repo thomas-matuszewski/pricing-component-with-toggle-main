@@ -1,0 +1,227 @@
+@use "./index";
+
+*,
+*::after,
+*::before {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+html {
+   font-size: 62.5%;
+   scroll-behavior: smooth;
+   // scroll-padding-top: ;
+}
+
+img,
+picture,
+source {
+   display: block;
+   max-width: 100%;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+   overflow-wrap: break-word;
+}
+
+a,
+button {
+   cursor: revert;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+   all: revert;
+}
+
+ol,
+ul,
+menu {
+   list-style: none;
+}
+
+body {
+   height: 100%;
+   font-family: "Montserrat", sans-serif;
+   font-weight: 700;
+   background-color: index.$very-light-grayish-blue;
+   background-image: url(/dist/img/bg-top.svg);
+   background-repeat: no-repeat;
+   background-size: 20em;
+   background-position: top right -5em;
+}
+
+input:focus,
+button:focus {
+   outline: none;
+   box-shadow: 0 0 0 2px index.$white, 0 0 0 4px index.$light-blue;
+}
+
+.flex {
+   @include index.flex;
+}
+
+.container {
+   display: grid;
+   place-content: center;
+   height: 100%;
+   text-align: center;
+   margin: 4em 2em;
+}
+
+.pricing-box {
+   display: grid;
+   gap: 2em;
+   margin-bottom: 4em;
+   color: index.$grayish-blue;
+   &__title {
+      font-size: 3rem;
+   }
+   &__option {
+      font-size: 1.2rem;
+      opacity: 0.8;
+   }
+   &__checkbox[type="checkbox"] {
+      -webkit-appearance: none;
+      margin-inline: 1em;
+      appearance: none;
+      width: 3.5em;
+      height: 2em;
+      border-radius: 5em;
+      transform: translateY(-0.075em);
+      display: grid;
+      place-content: center;
+      background-image: index.$linear-gradient;
+      cursor: pointer;
+      transition: all 0.4s;
+      &:hover {
+         opacity: 0.5;
+      }
+      &::before {
+         content: "";
+         width: 1.5em;
+         height: 1.5em;
+         border-radius: 50%;
+         background-color: index.$very-light-grayish-blue;
+         transform: translateX(0.75em);
+         transition: transform 0.4s;
+      }
+      &:checked::before {
+         transform: translateX(-0.75em);
+      }
+   }
+}
+
+.cards {
+   display: grid;
+   gap: 2em;
+   color: index.$dark-grayish-blue;
+   .card {
+      display: grid;
+      gap: 2em;
+      border-radius: 1em;
+      background-color: index.$white;
+      padding: 2em;
+      min-width: 280px;
+      &--active {
+         background-image: index.$linear-gradient;
+         color: index.$very-light-grayish-blue;
+      }
+      &__title {
+         font-size: 1.5rem;
+         opacity: 0.7;
+      }
+      &__price {
+         font-size: 4.5rem;
+         padding: 0 2rem;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         span {
+            font-size: 3rem;
+            margin-right: 0.1em;
+         }
+         &--hidden {
+            display: none;
+         }
+      }
+      &__options {
+         opacity: 0.7;
+         &-item {
+            font-size: 1.2rem;
+            padding-block: 1em;
+            border-bottom: 1px solid index.$light-grayish-blue;
+            &:first-child {
+               border-top: 1px solid index.$light-grayish-blue;
+            }
+         }
+      }
+      &__btn {
+         font-size: 1.2rem;
+         padding: 1em 2em;
+         font-weight: 700;
+         letter-spacing: 1px;
+         border-radius: 5px;
+         background-image: index.$linear-gradient;
+         border: 1px solid transparent;
+         outline: none;
+         color: index.$very-light-grayish-blue;
+         text-transform: uppercase;
+         opacity: 0.9;
+         transition: all 0.4s;
+         cursor: pointer;
+         &:hover {
+            background-image: none;
+            background-color: transparent;
+            border: 1px solid index.$light-blue;
+            color: index.$light-blue;
+         }
+         &--active {
+            background-image: none;
+            background-color: index.$white;
+            color: index.$light-blue;
+            &:hover {
+               background-color: transparent;
+               border: 1px solid index.$white;
+               color: index.$white;
+            }
+            &:focus {
+               box-shadow: 0 0 0 2px index.$light-blue, 0 0 0 4px index.$white;
+            }
+         }
+      }
+   }
+}
+
+@media (min-width: 992px) {
+   html,
+   body {
+      height: 100vh;
+   }
+   body {
+      background-size: 30em;
+      background-image: url(/dist/img/bg-top.svg), url(/dist/img/bg-bottom.svg);
+      background-repeat: no-repeat;
+      background-size: 30em, 40em;
+      background-position: top right, bottom left;
+   }
+   .container {
+      margin: 0 2em;
+   }
+   .cards {
+      margin-top: 2em;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      .card--active {
+         height: 110%;
+      }
+   }
+}
